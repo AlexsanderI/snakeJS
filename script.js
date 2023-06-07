@@ -26,6 +26,7 @@ const changeDirection = (e) => {
     vectorX = -1;
     vectorY = 0;
   }
+  initGame();
 };
 
 const initGame = () => {
@@ -48,6 +49,6 @@ const initGame = () => {
 };
 
 changeFoodPosition();
-
+initGame();
 document.addEventListener('keydown', changeDirection);
-setInterval(initGame, 125);
+// setInterval(initGame, 125);
