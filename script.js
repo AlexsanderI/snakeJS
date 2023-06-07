@@ -15,16 +15,16 @@ const changeFoodPosition = () => {
 };
 
 const changeDirection = (e) => {
-  if (e.key === 'ArrowUp') {
+  if (e.key === 'ArrowUp' && vectorY != 1) {
     vectorX = 0;
     vectorY = -1;
-  } else if (e.key === 'ArrowDown') {
+  } else if (e.key === 'ArrowDown' && vectorY != -1) {
     vectorX = 0;
     vectorY = 1;
-  } else if (e.key === 'ArrowRight') {
+  } else if (e.key === 'ArrowRight' && vectorX != -1) {
     vectorX = 1;
     vectorY = 0;
-  } else if (e.key === 'ArrowLeft') {
+  } else if (e.key === 'ArrowLeft' && vectorX != 1) {
     vectorX = -1;
     vectorY = 0;
   }
