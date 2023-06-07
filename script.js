@@ -1,11 +1,13 @@
 const playBoard = document.querySelector('.play-board');
 
+let gameOver = false;
 let foodX, foodY;
 let snakeBody = [];
 let snakeX = 5,
   snakeY = 10;
 let vectorX = 0,
   vectorY = 0;
+let setIntervalId;
 
 const changeFoodPosition = () => {
   foodX = Math.floor(Math.random() * 30) + 1;
@@ -29,12 +31,18 @@ const changeDirection = (e) => {
   //   initGame();
 };
 
+const handleGameOver = () => {
+  clearInterval(setIntervalId);
+  alert('Game Over! Press OK to replay the game');
+  location.reload(); // what is the method called
+};
+
 const initGame = () => {
+  if (gameOver) return handleGameOver(); // how it is work
   let htmlMarkup = `<div class="food" style="grid-area: ${foodY} / ${foodX}" ></div>`;
   if (snakeX === foodX && snakeY === foodY) {
     changeFoodPosition();
     snakeBody.push([foodX, foodY]);
-    console.log(snakeBody);
   }
 
   for (let i = snakeBody.length - 1; i > 0; i--) {
@@ -44,7 +52,9 @@ const initGame = () => {
   snakeBody[0] = [snakeX, snakeY];
   snakeX += vectorX;
   snakeY += vectorY;
-
+  if (snakeX <= 0 || snakeX > 30 || snakeY <= 0 || snakeY > 30) {
+    gameOver = true;
+  }
   for (let i = 0; i < snakeBody.length; i++) {
     htmlMarkup += `<div class="head" style="grid-area: ${snakeBody[i][1]} / ${snakeBody[i][0]}" ></div>`;
   }
@@ -55,4 +65,4 @@ const initGame = () => {
 changeFoodPosition();
 // initGame();
 document.addEventListener('keydown', changeDirection);
-setInterval(initGame, 125);
+setIntervalId = setInterval(initGame, 125);
