@@ -26,7 +26,7 @@ const changeDirection = (e) => {
     vectorX = -1;
     vectorY = 0;
   }
-  initGame();
+  //   initGame();
 };
 
 const initGame = () => {
@@ -35,6 +35,10 @@ const initGame = () => {
     changeFoodPosition();
     snakeBody.push([foodX, foodY]);
     console.log(snakeBody);
+  }
+
+  for (let i = snakeBody.length - 1; i > 0; i--) {
+    snakeBody[i] = snakeBody[i - 1];
   }
 
   snakeBody[0] = [snakeX, snakeY];
@@ -49,6 +53,6 @@ const initGame = () => {
 };
 
 changeFoodPosition();
-initGame();
+// initGame();
 document.addEventListener('keydown', changeDirection);
-// setInterval(initGame, 125);
+setInterval(initGame, 125);
